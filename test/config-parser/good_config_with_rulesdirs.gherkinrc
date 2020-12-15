@@ -1,0 +1,3 @@
+{
+  "additionalRulesDirs" : ["rulesdir", "./rules", "gherkin/rules"]
+}

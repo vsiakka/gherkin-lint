@@ -26,6 +26,10 @@ describe('Config Verifier', function() {
         'indentation': ['on', { 'Feature': 1, 'Background': 1, 'Scenario': 1, 'Step': 1, 'given': 1, 'and': 1}]
       }), []);
     });
+
+    it('an additional rule directory is specified', function() {
+      assert.deepEqual(verifyConfig({'additionalRulesDirs': ['.rules']}), []);
+    });
   });
 
   describe('Verification fails when', function() {
@@ -61,6 +65,12 @@ describe('Config Verifier', function() {
 
       assert.deepEqual(verifyConfig({'new-line-at-eof': ['on', 'yes', 'p3']}), [
         'Invalid rule configuration for "new-line-at-eof" -  The config should only have 2 parts.'
+      ]);
+    });
+
+    it('an additional rule directory is not an array', function() {
+      assert.deepEqual(verifyConfig({'additionalRulesDirs': 'a'}), [
+        'Invalid rule configuration for "additionalRulesDirs" - The config should be an Array.'
       ]);
     });
   });

@@ -3,6 +3,14 @@ const rules = require('./rules.js');
 function verifyConfigurationFile(config, additionalRulesDirs) {
   let errors = [];
   for (let rule in config) {
+    if (rule === 'additionalRulesDirs') {
+      if (!Array.isArray(config[rule])) {
+        // The additionalRulesDirs must be an Array.
+        const genericErrorMsg = 'Invalid rule configuration for "' + rule + '" - ';
+        errors.push(genericErrorMsg + 'The config should be an Array.');
+      }
+      continue;
+    }
     if (!rules.doesRuleExist(rule, additionalRulesDirs)) {
       errors.push('Rule "' + rule + '" does not exist');
     } else {
