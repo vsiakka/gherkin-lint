@@ -1,3 +1,5 @@
 {
-  "no-files-without-scenarios" : "off"
+  "rules": {
+    "no-files-without-scenarios" : "off"
+  }
 }

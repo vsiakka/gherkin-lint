@@ -12,8 +12,7 @@ function run(feature) {
   feature.children.forEach(child => {
     const node = child.rule || child.background || child.scenario;
     let previousKeyword = undefined;
-    if (node.steps)
-    {
+    if (node.steps) {
       node.steps.forEach(step => {
         const keyword = gherkinUtils.getLanguageInsitiveKeyword(step, feature.language);
 
