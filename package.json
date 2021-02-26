@@ -1,6 +1,6 @@
 {
   "name": "gherkin-lint",
-  "version": "4.1.3",
+  "version": "4.2.0",
   "description": "A Gherkin linter/validator written in javascript",
   "author": "Vasiliki Siakka",
   "contributors": [
@@ -75,6 +75,26 @@
     {
       "name": "Andrew Nicols",
       "url": "https://github.com/andrewnicols"
+    },
+    {
+      "name": "Mike O'Connor",
+      "url": "https://github.com/mikeoconnor0308"
+    },
+    {
+      "name": "Dave M",
+      "url": "https://github.com/dsm2005"
+    },
+    {
+      "name": "Justin Zelinsky",
+      "url": "https://github.com/justinzelinsky"
+    },
+    {
+      "name": "Mathieu Couette",
+      "url": "https://github.com/MathieuCouette"
+    },
+    {
+      "name": "David Rodríguez",
+      "url": "https://github.com/deivid-rodriguez"
     }
   ],
   "main": "dist/main.js",
@@ -92,7 +112,8 @@
     "gherkin": "9.0.0",
     "glob": "7.1.6",
     "lodash": "4.17.21",
-    "strip-json-comments": "3.0.1"
+    "strip-json-comments": "3.0.1",
+    "xml-js": "^1.6.11"
   },
   "devDependencies": {
     "@babel/cli": "7.8.4",

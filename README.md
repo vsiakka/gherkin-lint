@@ -57,7 +57,7 @@ Or check this:
 | `no-unnamed-scenarios`                      | Disallows empty Scenario name                                                            |
 | `no-unused-variables`                       | Disallows unused variables in scenario outlines                                          |
 | `one-space-between-tags`                    | Tags on the same line must be separated by a single space                                |
-| `required-tags`                             | Require tags/patterns of tags on Scenarios                                               |
+| [`required-tags`](#required-tags)           | Require tags/patterns of tags on Scenarios                                               |
 | [`scenario-size`](#scenario-size)           | Allows restricting the maximum number of steps in a scenario, scenario outline and background |
 | `use-and`                                   | Disallows repeated step names requiring use of And instead                               |
 | `keywords-in-logical-order`                 | Requires that Given, When and Then appear in logical sequence                            |
@@ -272,6 +272,20 @@ or
   "rules": {
     "no-restricted-tags": ["on", {"tags": ["@watch", "@wip"], "patterns": ["^@todo$"]}]
   }
+}
+```
+
+
+### required-tags
+
+`required-tags` supports some configuration options:
+
+- `tags` (array) the array of tag patterns that must match at least one tag - defaults to `[]`
+- `ignoreUntagged` (boolean) whether to ignore scenarios that have no tag - defaults to `true`
+
+```
+{
+  "required-tags": ["on", {"tags": ["^@issue:[1-9]\\d*$"], "ignoreUntagged": false}]
 }
 ```
 

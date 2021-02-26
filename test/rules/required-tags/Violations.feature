@@ -16,3 +16,9 @@ Scenario Outline: This is a Scenario Outline with some of the required tags miss
 Examples:
   | foo |
   | bar |
+
+Scenario: This is a Scenario that has no tag
+  Then I should see an error
+
+Scenario Outline: This is a Scenario Outline that has no tag
+  Then I should see an error

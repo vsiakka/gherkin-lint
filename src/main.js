@@ -17,7 +17,7 @@ function collect(val, memo) {
 
 program
   .usage('[options] <feature-files>')
-  .option('-f, --format [format]', 'output format. Possible values: json, stylish. Defaults to stylish')
+  .option('-f, --format [format]', 'output format. Possible values: json, stylish, xunit. Defaults to stylish')
   .option('-i, --ignore <...>', 'comma seperated list of files/glob patterns that the linter should ignore, overrides ' + featureFinder.defaultIgnoreFileName + ' file', list)
   .option('-c, --config [config]', 'configuration file, defaults to ' + configParser.defaultConfigFileName)
   .option('-r, --rulesdir <...>', 'additional rule directories', collect, [])
@@ -46,10 +46,12 @@ function printResults(results, format) {
   let formatter;
   if (format === 'json') {
     formatter = require('./formatters/json.js');
-  } else if (!format || format == 'stylish') {
+  } else if (format === 'xunit') {
+    formatter = require('./formatters/xunit.js');
+  } else if (!format || format === 'stylish') {
     formatter = require('./formatters/stylish.js');
   } else {
-    logger.boldError('Unsupported format. The supported formats are json and stylish.');
+    logger.boldError('Unsupported format. The supported formats are json, xunit and stylish.');
     process.exit(1);
   }
   formatter.printResults(results);

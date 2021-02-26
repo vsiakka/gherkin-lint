@@ -1,25 +1,21 @@
+const _ = require('lodash');
 const gherkinUtils = require('./utils/gherkin.js');
 
 const rule = 'required-tags';
 const availableConfigs = {
-  tags: []
+  tags: [],
+  ignoreUntagged: true
 };
 
 
-function checkTagExists(requiredTag, scenarioTags, scenarioType) {
-  const result = scenarioTags.length == 0
+function checkTagExists(requiredTag, ignoreUntagged, scenarioTags, scenarioType, scenarioLine) {
+  const result = (ignoreUntagged && scenarioTags.length == 0)
     || scenarioTags.some((tagObj) => RegExp(requiredTag).test(tagObj.name));
   if (!result) {
-    const lines = [];
-    scenarioTags.forEach((tag) => {
-      if (!lines.includes(tag.location.line)) {
-        lines.push(tag.location.line);
-      }
-    });
     return {
       message: `No tag found matching ${requiredTag} for ${scenarioType}`,
       rule,
-      line: lines.join(',')
+      line: scenarioLine
     };
   }
   return result;
@@ -30,14 +26,17 @@ function run(feature, unused, config) {
     return [];
   }
 
+  const mergedConfig = _.merge({}, availableConfigs, config);
+
   let errors = [];
   feature.children.forEach((child) => {
     if (child.scenario) {
       const type = gherkinUtils.getNodeType(child.scenario, feature.language);
+      const line = child.scenario.location.line;
 
       // Check each Scenario for the required tags
-      const requiredTagErrors = config.tags
-        .map(requiredTag => checkTagExists(requiredTag, child.scenario.tags || [], type))
+      const requiredTagErrors = mergedConfig.tags
+        .map((requiredTag) => checkTagExists(requiredTag, mergedConfig.ignoreUntagged, child.scenario.tags || [], type, line))
         .filter((item) =>
           typeof item === 'object' && item.message
         );

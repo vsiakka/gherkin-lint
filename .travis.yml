@@ -3,6 +3,6 @@ node_js:
   - "node"
   - "10"
   - "12"
-  - "13"
+  - "14"
 script: "npm test"
 after_success: npm run coverage
