@@ -289,12 +289,12 @@ There are 2 ways you can specify files that the linter should ignore:
 
 
 ## Custom rules
-You can specify one more more custom rules directories by using the `-r` or `--rulesdir` command line option. Rules in the given directories will be available additionally to the default rules.
+You can specify one more more custom rules directories in the configuration file, or by using the `-r` or `--rulesdir` command line option. Rules in the given directories will be available additionally to the default rules.
 
 Example:
 ```
 gherkin-lint --rulesdir "/path/to/my/rulesdir" --rulesdir "from/cwd/rulesdir"
 ```
 
-Paths can either be absolute or relative to the current working directory.
+Paths specified in the gherkin-lintrc should be speified relative to the gherkin-lintrc. Paths specified as a command line option can either be absolute or relative to the current working directory.
 Have a look at the `src/rules/` directory for examples; The `no-empty-file` rule is a good example to start with.

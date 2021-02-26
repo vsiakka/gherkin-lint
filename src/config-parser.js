@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 const stripJsonComments = require('strip-json-comments');
 const verifyConfig = require('./config-verifier.js');
 const logger = require('./logger.js');
@@ -19,7 +20,19 @@ function getConfiguration(configPath, additionalRulesDirs) {
     configPath = defaultConfigFileName;
   }
   const config = JSON.parse(stripJsonComments(fs.readFileSync(configPath, {encoding: 'UTF-8'})));
-  const errors = verifyConfig(config, additionalRulesDirs);
+
+  if (additionalRulesDirs) {
+    // Use the supplied additionalRulesDirs instead of the version in configuration.
+    config.additionalRulesDirs = additionalRulesDirs;
+  } else if (config.additionalRulesDirs) {
+    // Map the paths in the additionalRulesDirs configuration relative to the configuration file.
+    config.additionalRulesDirs = config.additionalRulesDirs.map(additionalRulesDir => path.resolve(
+      path.dirname(configPath),
+      additionalRulesDir
+    ));
+  }
+
+  const errors = verifyConfig(config, config.additionalRulesDirs);
 
   if (errors.length > 0) {
     logger.boldError('Error(s) in configuration file:');

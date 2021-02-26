@@ -59,6 +59,14 @@ function readAndParseFile(filePath) {
 function lint(files, configuration, additionalRulesDirs) {
   let results = [];
 
+  // Ensure configuration exists.
+  configuration = configuration || {};
+
+  if (!additionalRulesDirs && configuration.additionalRulesDirs) {
+    // Fallback to config.additionalRulesDirs if additionalRulesDirs was empty.
+    additionalRulesDirs = configuration.additionalRulesDirs;
+  }
+
   return Promise.all(files.map((f) => {
     let perFileErrors = [];
 

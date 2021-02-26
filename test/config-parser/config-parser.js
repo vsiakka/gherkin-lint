@@ -76,4 +76,49 @@ describe('Configuration parser', function() {
       expect(process.exit.neverCalledWith(1));
     });
   });
+
+  describe('handles additionalRulesDirs configuration correctly by', function() {
+    it('resolving paths relative to the configuration file', function() {
+      var path = require('path');
+
+      var configFileDir = 'test/config-parser/';
+      var configFilePath = path.resolve(configFileDir, 'good_config_with_rulesdirs.gherkinrc');
+      var parsedConfig = configParser.getConfiguration(configFilePath);
+
+      var expectedPaths = [
+        path.resolve(configFileDir, 'rulesdir'),
+        path.resolve(configFileDir, 'rules'),
+        path.resolve(configFileDir, 'gherkin/rules'),
+      ];
+
+      expect(process.exit.neverCalledWith(1));
+      expect(parsedConfig).to.deep.eq({'additionalRulesDirs': expectedPaths});
+    });
+
+    it('using specified additionalRulesDirs instead of configuration', function() {
+      var path = require('path');
+
+      var configFileDir = 'test/config-parser/';
+      var configFilePath = path.resolve(configFileDir, 'good_config_with_rulesdirs.gherkinrc');
+      var parsedConfig = configParser.getConfiguration(configFilePath, []);
+
+      var expectedPaths = [];
+
+      expect(process.exit.neverCalledWith(1));
+      expect(parsedConfig).to.deep.eq({'additionalRulesDirs': expectedPaths});
+    });
+
+    it('not modifying supplied additionalRulesDirs', function() {
+      var path = require('path');
+
+      var configFileDir = 'test/config-parser/';
+      var configFilePath = path.resolve(configFileDir, 'good_config_with_rulesdirs.gherkinrc');
+      var parsedConfig = configParser.getConfiguration(configFilePath, ['example/rules/dir']);
+
+      var expectedPaths = ['example/rules/dir'];
+
+      expect(process.exit.neverCalledWith(1));
+      expect(parsedConfig).to.deep.eq({'additionalRulesDirs': expectedPaths});
+    });
+  });
 });

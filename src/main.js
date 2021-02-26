@@ -26,7 +26,7 @@ program
 const additionalRulesDirs = program.rulesdir;
 const files = featureFinder.getFeatureFiles(program.args, program.ignore);
 const config = configParser.getConfiguration(program.config, additionalRulesDirs);
-linter.lint(files, config, additionalRulesDirs)
+linter.lint(files, config)
   .then((results) => {
     printResults(results, program.format);
     process.exit(getExitCode(results));
