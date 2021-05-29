@@ -3,5 +3,7 @@ block comment
 */
 {
   // inline comment
-  "no-files-without-scenarios" : "off"
+  "rules": {
+    "no-files-without-scenarios" : "off"
+  }
 }

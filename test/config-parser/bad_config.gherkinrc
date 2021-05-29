@@ -1,3 +1,5 @@
 {
-  "fake-rule" : "on"
+  "rules": {
+    "fake-rule" : "on"
+  }
 }

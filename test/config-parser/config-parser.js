@@ -59,14 +59,14 @@ describe('Configuration parser', function() {
       var configFilePath = 'test/config-parser/good_config.gherkinrc';
       var parsedConfig = configParser.getConfiguration(configFilePath);
       expect(process.exit.neverCalledWith(1));
-      expect(parsedConfig).to.deep.eq({'no-files-without-scenarios': 'off'});
+      expect(parsedConfig).to.deep.eq({'rules': {'no-files-without-scenarios': 'off'}});
     });
 
     it('a good configuration file is used that includes comments', function() {
       var configFilePath = 'test/config-parser/good_config_with_comments.gherkinrc';
       var parsedConfig = configParser.getConfiguration(configFilePath);
       expect(process.exit.neverCalledWith(1));
-      expect(parsedConfig).to.deep.eq({'no-files-without-scenarios': 'off'});
+      expect(parsedConfig).to.deep.eq({'rules': {'no-files-without-scenarios': 'off'}});
     });
 
     it('the default configuration file is found', function() {

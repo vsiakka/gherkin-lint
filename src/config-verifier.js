@@ -2,11 +2,14 @@ const rules = require('./rules.js');
 
 function verifyConfigurationFile(config, additionalRulesDirs) {
   let errors = [];
-  for (let rule in config) {
-    if (!rules.doesRuleExist(rule, additionalRulesDirs)) {
-      errors.push('Rule "' + rule + '" does not exist');
-    } else {
-      verifyRuleConfiguration(rule, config[rule], additionalRulesDirs, errors);
+  if (config.rules) {
+    let ruleConfig = config.rules;
+    for (let rule in ruleConfig) {
+      if (!rules.doesRuleExist(rule, additionalRulesDirs)) {
+        errors.push('Rule "' + rule + '" does not exist');
+      } else {
+        verifyRuleConfiguration(rule, ruleConfig[rule], additionalRulesDirs, errors);
+      }
     }
   }
   return errors;
