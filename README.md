@@ -61,6 +61,7 @@ Or check this:
 | [`scenario-size`](#scenario-size)           | Allows restricting the maximum number of steps in a scenario, scenario outline and background |
 | `use-and`                                   | Disallows repeated step names requiring use of And instead                               |
 | `keywords-in-logical-order`                 | Requires that Given, When and Then appear in logical sequence                            |
+| `only-one-when`                             | Requires that there is at most one When step for each scenario                           |
 
 \* These rules cannot be turned off because they detect undocumented cucumber functionality that causes the [gherkin](https://github.com/cucumber/gherkin-javascript) parser to crash.
 

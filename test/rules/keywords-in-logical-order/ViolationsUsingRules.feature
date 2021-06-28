@@ -1,6 +1,6 @@
-Feature: Feature with keywords-in-logical-order violations
-  Using whitespace so that line numbers of errors are the same
-  in this file and ViolationsUsingRules.feature
+Feature: Feature with keywords-in-logical-order violations, with file that uses gherkin rules
+
+Rule: This is a rule
 
 Background: All violations
   Then step1
